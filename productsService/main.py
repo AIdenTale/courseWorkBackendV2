@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from productsService.db.client import PostgresClient
+from db.client import PostgresClient
 
 app = FastAPI()
 
