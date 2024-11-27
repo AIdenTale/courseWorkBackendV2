@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: products-service
-          image: 127.0.0.1:5000/productsService:latest
+          image: 127.0.0.1:5000/products-service:latest
           ports:
             - name: web
               containerPort: 8080
