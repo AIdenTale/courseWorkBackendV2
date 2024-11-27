@@ -1,0 +1,2 @@
+### Все продукты
+GET http://localhost:8081/products/all
