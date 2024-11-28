@@ -1,9 +1,9 @@
 import psycopg2
 from typing import  Tuple
 
-from models.api import UserAuthReqModel
+from authService.models.api import UserAuthReqModel
 
-from models.exceptions import EmailAlreadyRegistered
+from authService.models.exceptions import EmailAlreadyRegistered
 
 DEFAULT_USER_ROLE = "user"
 

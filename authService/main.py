@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from starlette.responses import JSONResponse
 
-from models.exceptions import EmailAlreadyRegistered
-from models.api import UserAuthReqModel, ErrorRespModel
-from services.services import AuthService
+from authService.models.exceptions import EmailAlreadyRegistered
+from authService.models.api import UserAuthReqModel, ErrorRespModel
+from authService.services.services import AuthService
 
 app = FastAPI()
 

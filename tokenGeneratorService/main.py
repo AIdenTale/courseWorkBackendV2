@@ -1,9 +1,9 @@
 from fastapi import FastAPI, Request
 from starlette.responses import JSONResponse
 
-from models.api import GenerateNewTokenReqModel, VerifyTokenReqModel, ErrorRespModel
-from services.middlewares import authorization_middleware
-from services.services import generate_new_token, verify_token
+from tokenGeneratorService.models.api import GenerateNewTokenReqModel, VerifyTokenReqModel, ErrorRespModel
+from tokenGeneratorService.services.middlewares import authorization_middleware
+from tokenGeneratorService.services.services import generate_new_token, verify_token
 
 app = FastAPI()
 

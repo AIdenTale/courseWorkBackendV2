@@ -1,4 +1,4 @@
-from db.client import PostgresClient
+from productsService.db.client import PostgresClient
 
 
 class ProductsService:

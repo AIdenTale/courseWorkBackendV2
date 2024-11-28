@@ -2,7 +2,7 @@ from typing import Annotated
 
 from pydantic import BaseModel, AfterValidator
 
-from utils.validators.str import required, email_required
+from authService.utils.validators.str import required, email_required
 
 class ErrorRespModel(BaseModel):
     message: str

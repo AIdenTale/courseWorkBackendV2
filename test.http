@@ -2,12 +2,12 @@
 GET http://localhost:8081/products/all
 
 ### Регистрация
-POST http://localhost:8081/register
+POST http://88.218.66.164/srv/auth-service/register
 Content-Type: application/json
 
 {
   "name": "Nikita",
-  "surname": "Almester2",
+  "surname": "Almester3",
   "email": "nikita.almester@ya.ru",
   "password": "qwerty123"
 }

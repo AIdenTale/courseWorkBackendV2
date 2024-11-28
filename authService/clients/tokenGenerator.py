@@ -3,8 +3,8 @@ import os
 
 import aiohttp
 
-from models.api import TokenGeneratorServiceRespModel
-from models.exceptions import ServiceUnavailableException
+from authService.models.api import TokenGeneratorServiceRespModel
+from authService.models.exceptions import ServiceUnavailableException
 
 
 async def generate_new_token(id, role):

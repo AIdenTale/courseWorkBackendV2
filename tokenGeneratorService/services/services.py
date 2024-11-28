@@ -1,8 +1,8 @@
 import jwt
 
-from models.api import UserAuthRespModel, ErrorRespModel, VerifyTokenRespModel
-from utils.jwt.exceptions import JWTErrGetSecret
-from utils.jwt.utils import gen_jwt_with_claims, jwt_verify_token
+from tokenGeneratorService.models.api import UserAuthRespModel, ErrorRespModel, VerifyTokenRespModel
+from tokenGeneratorService.utils.jwt.exceptions import JWTErrGetSecret
+from tokenGeneratorService.utils.jwt.utils import gen_jwt_with_claims, jwt_verify_token
 
 
 async def generate_new_token(user_id: int, role: str):

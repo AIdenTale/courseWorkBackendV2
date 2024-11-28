@@ -1,7 +1,7 @@
 import psycopg2
 from typing import Any
 
-from models.db import ProductModel
+from productsService.models.db import ProductModel
 
 
 class PostgresClient():
