@@ -1,8 +1,9 @@
 ### Все продукты
 GET http://localhost:8081/products/all
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6InVzZXIiLCJpYXQiOjE3MzI3OTUwNTgsImV4cCI6MTczMjg4MTQ1OH0.GSlnCGXWmjUVpTTEdQ6-sntPNjBatUVfSJmrlknJ2zs
 
 ### Регистрация
-POST http://88.218.66.164/srv/auth-service/register
+POST http://localhost:8083/register
 Content-Type: application/json
 
 {
@@ -12,8 +13,17 @@ Content-Type: application/json
   "password": "qwerty123"
 }
 
+### Авторизация
+POST http://localhost:8083/auth
+Content-Type: application/json
+
+{
+  "email": "nikita.almester@ya.ru",
+  "password": "qwerty123"
+}
+
 ### Получить токен (внутренняя апи)
-POST http://localhost:8081/jwt/generate_new
+POST http://localhost:8085/jwt/generate_new
 Content-Type: application/json
 Authorization: YmFzaWM6YXV0aA==
 

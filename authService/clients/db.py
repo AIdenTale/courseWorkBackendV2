@@ -1,7 +1,7 @@
 import psycopg2
 from typing import  Tuple
 
-from authService.models.api import UserAuthReqModel
+from authService.models.api import UserAuthReqModel, UserLoginReqModel
 
 from authService.models.exceptions import EmailAlreadyRegistered
 
@@ -25,5 +25,18 @@ class PostgresClient():
 
         cur.close()
         self.conn.commit()
+
+        return records[0][0], records[0][1]
+
+    def get_user(self, user: UserLoginReqModel) -> Tuple[int, str] | None:
+        cur = self.conn.cursor()
+
+        cur.execute("SELECT users.id, users.role FROM public.users WHERE email = %s AND password = %s", (user.email,user.password,))
+        records = cur.fetchall()
+
+        cur.close()
+
+        if len(records) == 0:
+            return None
 
         return records[0][0], records[0][1]

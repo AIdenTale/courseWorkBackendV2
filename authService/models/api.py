@@ -18,3 +18,10 @@ class UserAuthReqModel(BaseModel):
 
 class UserAuthRespModel(BaseModel):
     access_token: str
+
+class UserLoginReqModel(BaseModel):
+    email: Annotated[str, AfterValidator(required), AfterValidator(email_required)]
+    password: Annotated[str, AfterValidator(required)]
+
+class UserNotFound(BaseModel):
+    message: str
