@@ -1,6 +1,7 @@
 import psycopg2
 from typing import Any
 
+from productsService.models.api import ProductsCardModel
 from productsService.models.db import ProductModel
 
 
@@ -11,12 +12,35 @@ class PostgresClient():
 
     def get_all_products(self) -> list[Any]:
         cur = self.conn.cursor()
-        cur.execute("SELECT * FROM public.products")
+        cur.execute("SELECT * FROM public.products_card")
         records = cur.fetchall()
 
-        models = []
+        cards_models = []
         if len(records) != 0:
             for record in records:
-                models.append(ProductModel(id=record[0], title=record[1], brand=record[2], price=record[3], size=record[4], color=record[5], country=record[6]))
+                cards_models.append(ProductsCardModel(id=record[0], title=record[1], description=record[2]))
+        else:
+            return cards_models
 
-        return models
+        cur.close()
+        for card in cards_models:
+            card_id = card.id
+
+            cur = self.conn.cursor()
+            cur.execute("SELECT * FROM public.products WHERE card_id = %s", (card_id,))
+
+            records = cur.fetchall()
+
+            if len(records) == 0:
+                continue
+
+            products = []
+            for record in records:
+                products.append(ProductModel(id=record[0], brand=record[1], price=record[2], size=record[3], color=record[4], country=record[5], card_id=card_id))
+
+            card.products = products
+            card.count = len(products)
+
+
+        cur.close()
+        return cards_models
