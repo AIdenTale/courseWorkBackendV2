@@ -23,7 +23,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: basic-creds
-                  key: user
+                  key: username
             - name: PASSWORD_BASIC
               valueFrom:
                 secretKeyRef:
