@@ -3,8 +3,8 @@ import os
 
 import aiohttp
 
-from authService.models.api import TokenGeneratorServiceRespModel
-from authService.models.exceptions import ServiceUnavailableException
+from models.api import TokenGeneratorServiceRespModel
+from models.exceptions import ServiceUnavailableException
 
 
 async def generate_new_token(id, role):
@@ -17,7 +17,7 @@ async def generate_new_token(id, role):
     session.headers.setdefault('Authorization', base64.b64encode(f'{user}:{password}'.encode('utf-8')).decode('utf-8'))
 
 
-    response = await session.post("http://localhost:8085/jwt/generate_new", json={"id": id, "role": role})
+    response = await session.post("http://token-generator-service/jwt/generate_new", json={"id": id, "role": role})
     if response.status == 500:
         raise ServiceUnavailableException("cannot make request")
 

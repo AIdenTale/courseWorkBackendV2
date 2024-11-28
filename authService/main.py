@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
-from authService.models.api import UserAuthReqModel
-from authService.services.services import AuthService
+from models.api import UserAuthReqModel
+from services.services import AuthService
 
 app = FastAPI()
 

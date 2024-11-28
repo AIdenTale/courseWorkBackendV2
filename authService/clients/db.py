@@ -1,8 +1,7 @@
 import psycopg2
 from typing import Any, Tuple
 
-from authService.models.api import UserAuthReqModel
-from authService.models.db import ProductModel
+from models.api import UserAuthReqModel
 
 DEFAULT_USER_ROLE = "user"
 

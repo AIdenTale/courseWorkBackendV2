@@ -1,9 +1,9 @@
-from authService.clients.db import PostgresClient
-from authService.clients.tokenGenerator import generate_new_token
+from clients.db import PostgresClient
+from clients.tokenGenerator import generate_new_token
 
-from authService.models.api import UserAuthReqModel, ErrorRespModel, UserAuthRespModel
-from authService.models.exceptions import ServiceUnavailableException
-from authService.utils.utils import get_hash_password
+from models.api import UserAuthReqModel, ErrorRespModel, UserAuthRespModel
+from models.exceptions import ServiceUnavailableException
+from utils.utils import get_hash_password
 
 class AuthService:
     async def register_user(self, user: UserAuthReqModel):
