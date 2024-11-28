@@ -1,0 +1,39 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: token-generator-service
+  labels:
+    app: token-generator-service
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: token-generator-service
+  template:
+    metadata:
+      labels:
+        app: token-generator-service
+    spec:
+      containers:
+        - name: token-generator-service
+          image: 127.0.0.1:5000/token-generator-service:latest
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-creds
+                  key: secret
+            - name: USER_BASIC
+              valueFrom:
+                secretKeyRef:
+                  name: basic-creds
+                  key: user
+            - name: PASSWORD_BASIC
+              valueFrom:
+                secretKeyRef:
+                  name: basic-creds
+                  key: password
+          ports:
+            - name: web
+              containerPort: 8080

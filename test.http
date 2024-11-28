@@ -1,2 +1,32 @@
 ### Все продукты
 GET http://localhost:8081/products/all
+
+### Регистрация
+POST http://localhost:8081/register
+Content-Type: application/json
+
+{
+  "name": "Nikita",
+  "surname": "Almester2",
+  "email": "nikita.almester@ya.ru",
+  "password": "qwerty123"
+}
+
+### Получить токен (внутренняя апи)
+POST http://localhost:8081/jwt/generate_new
+Content-Type: application/json
+Authorization: YmFzaWM6YXV0aA==
+
+{
+  "id": 5,
+  "role": "user"
+}
+
+### Провалидировать токен (внутренняя апи)
+POST http://localhost:8081/jwt/verify
+Content-Type: application/json
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6.eyJpZCI6NSwicm9sZSI6InVzZXIiLCJpYXQiOjE3MzI3NTI1OTIsImV4cCI6MTczMjgzODk5Mn0.KqN_COHv2WB9kqL1CUXoN_4lYLtr2P82E4SCQyJdhk0"
+}
+
