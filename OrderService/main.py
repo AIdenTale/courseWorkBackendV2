@@ -11,9 +11,9 @@ service = OrderService()
 def create_order(order: CreateOrder):
     try:
         order_id = service.create_order(order)
-        return JSONResponse(status_code=201, content={"order_id": order_id})
+        return JSONResponse(status_code=201)
     except Exception as e:
-        return JSONResponse(status_code=500, content={"error": "Internal Server Error", "message": str(e)})
+        return JSONResponse(status_code=500)
 
 
 @app.get("/orders/{order_id}")
