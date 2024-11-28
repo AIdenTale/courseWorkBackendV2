@@ -18,5 +18,7 @@ class PostgresClient():
         cur.execute("SELECT users.id, users.role FROM public.users WHERE email = %s", (user.email,))
         records = cur.fetchall()
 
+        cur.close()
+        self.conn.commit()
 
         return records[0][0], records[0][1]
