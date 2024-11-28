@@ -8,8 +8,8 @@ app = FastAPI()
 
 @app.get("/products/all")
 async def products_all(request: Request):
-    # result = await verify_token_middleware(request)
-    # if result is not None:
-    #     return result
+    result = await verify_token_middleware(request)
+    if result is not None:
+        return result
 
     return await get_all_products()
