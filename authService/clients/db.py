@@ -1,11 +1,9 @@
-from multiprocessing.managers import Value
-
 import psycopg2
-from typing import Any, Tuple
+from typing import  Tuple
 
 from models.api import UserAuthReqModel
 
-from authService.models.exceptions import EmailAlreadyRegistered
+from models.exceptions import EmailAlreadyRegistered
 
 DEFAULT_USER_ROLE = "user"
 

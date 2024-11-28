@@ -2,10 +2,9 @@ from clients.db import PostgresClient
 from clients.tokenGenerator import generate_new_token
 
 from models.api import UserAuthReqModel, ErrorRespModel, UserAuthRespModel
-from models.exceptions import ServiceUnavailableException
+from models.exceptions import ServiceUnavailableException, EmailAlreadyRegistered
 from utils.utils import get_hash_password
 
-from authService.models.exceptions import EmailAlreadyRegistered
 
 
 class AuthService:
