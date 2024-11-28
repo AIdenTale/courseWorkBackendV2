@@ -2,7 +2,7 @@ from typing import Annotated
 
 from pydantic import BaseModel, AfterValidator
 
-from tokenGeneratorService.utils.validators import required_str, required_int
+from utils.validators import required_str, required_int
 
 class ErrorRespModel(BaseModel):
     message: str
