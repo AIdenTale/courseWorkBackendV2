@@ -18,6 +18,17 @@ spec:
       containers:
         - name: products-service
           image: 127.0.0.1:5000/products-service:latest
+          env:
+            - name: USER_BASIC
+              valueFrom:
+                secretKeyRef:
+                  name: basic-creds
+                  key: user
+            - name: PASSWORD_BASIC
+              valueFrom:
+                secretKeyRef:
+                  name: basic-creds
+                  key: password
           ports:
             - name: web
               containerPort: 8080
