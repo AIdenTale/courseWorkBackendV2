@@ -17,11 +17,15 @@ async def verify_token(token: str):
 
 
     response = await session.post("http://token-generator-service:8080/jwt/verify", json={"token": token})
+
+    await session.close()
     if response.status == 500:
         raise ServiceUnavailableException("cannot make request")
 
     if response.status == 400:
         data = await response.json()
         raise TokenVerifyException(data)
+
+
 
     return True
