@@ -1,8 +1,8 @@
 from starlette.responses import JSONResponse
 from fastapi import Request
 
-from tokenGeneratorService.utils.exceptions import ValidationError
-from tokenGeneratorService.utils.validators import validate_authorization_header
+from utils.exceptions import ValidationError
+from utils.validators import validate_authorization_header
 
 
 def authorization_middleware(request: Request):

@@ -1,7 +1,7 @@
 import base64
 import os
 
-from tokenGeneratorService.utils.exceptions import ValidationError
+from utils.exceptions import ValidationError
 
 
 def required_str(v: str):

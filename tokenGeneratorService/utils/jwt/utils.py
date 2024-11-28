@@ -3,7 +3,7 @@ import os
 
 import jwt
 
-from tokenGeneratorService.utils.jwt.exceptions import JWTErrGetSecret
+from utils.jwt.exceptions import JWTErrGetSecret
 
 JWT_SECRET_ENV = "JWT_SECRET"
 
