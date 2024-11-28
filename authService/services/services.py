@@ -5,6 +5,9 @@ from models.api import UserAuthReqModel, ErrorRespModel, UserAuthRespModel
 from models.exceptions import ServiceUnavailableException
 from utils.utils import get_hash_password
 
+from authService.models.exceptions import EmailAlreadyRegistered
+
+
 class AuthService:
     async def register_user(self, user: UserAuthReqModel):
         client = PostgresClient()
@@ -12,7 +15,10 @@ class AuthService:
         hash_password = get_hash_password(user.password)
         user.password = hash_password
 
-        id, role = client.add_new_user(user)
+        try:
+            id, role = client.add_new_user(user)
+        except EmailAlreadyRegistered as e:
+            return e
 
         try:
             data = await generate_new_token(id, role)

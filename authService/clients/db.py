@@ -1,7 +1,11 @@
+from multiprocessing.managers import Value
+
 import psycopg2
 from typing import Any, Tuple
 
 from models.api import UserAuthReqModel
+
+from authService.models.exceptions import EmailAlreadyRegistered
 
 DEFAULT_USER_ROLE = "user"
 
@@ -12,8 +16,11 @@ class PostgresClient():
 
     def add_new_user(self, user: UserAuthReqModel) -> Tuple[int, str]:
         cur = self.conn.cursor()
-        cur.execute("INSERT INTO public.users (name, surname, email, password, role) VALUES (%s, %s, %s, %s, %s)",
-                    (user.name, user.surname, user.email, user.password, DEFAULT_USER_ROLE))
+        try:
+            cur.execute("INSERT INTO public.users (name, surname, email, password, role) VALUES (%s, %s, %s, %s, %s)",
+                        (user.name, user.surname, user.email, user.password, DEFAULT_USER_ROLE))
+        except psycopg2.errors.UniqueViolation:
+            raise EmailAlreadyRegistered(user.email)
 
         cur.execute("SELECT users.id, users.role FROM public.users WHERE email = %s", (user.email,))
         records = cur.fetchall()
