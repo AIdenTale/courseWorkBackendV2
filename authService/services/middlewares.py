@@ -3,15 +3,19 @@ import os
 from fastapi import Request
 from starlette.responses import JSONResponse
 
-from productsService.clients.tokenGenerator import verify_token
-from productsService.models.exception import ServiceUnavailableException, TokenVerifyException
+from authService.clients.tokenGenerator import verify_token
+from authService.models.api import TokenGeneratorVerifyToken
+from authService.models.exceptions import ServiceUnavailableException, TokenVerifyException
 
 JWT_TOKEN_TYPE = "Bearer"
 
-async def verify_token_middleware(request: Request):
-    mode = os.getenv("TEST_MODE")
-    if mode is not None:
-        return
+async def verify_token_middleware(request: Request) -> TokenGeneratorVerifyToken | JSONResponse:
+    # mode = os.getenv("SERVICE_MODE")
+    # if mode is not None:
+    #     if mode == "test":
+    #         return TokenGeneratorVerifyToken(id=1, role="admin")
+    #     else:
+    #         pass
 
     authorization = request.headers.get('Authorization')
     if authorization is None:
@@ -25,20 +29,17 @@ async def verify_token_middleware(request: Request):
         return JSONResponse({"error": "unauthorized", "message": "invalid token type"}, status_code=401)
 
     try:
-        await verify_token(payload[1])
+        return await verify_token(payload[1])
     except ServiceUnavailableException as e:
-        print("TokenGeneratorUnavailable, error: " + str(e))
         return JSONResponse({"error": "internal service error"}, status_code=500)
 
     except TokenVerifyException as e:
         return JSONResponse({"error": "unauthorized", "message": e.message}, status_code=401)
 
-    except ValueError:
-        print("VERIFY TOKEN ERROR: "+str(ValueError))
+    except ValueError as e:
+        print("VERIFY TOKEN ERROR: "+str(e))
         return JSONResponse({"error": "internal service error"}, status_code=500)
-    except Exception:
-        print("UNEXPECTED ERROR: " + str(ValueError))
+    except Exception as e:
+        print("VERIFY TOKEN ERROR: " + str(e))
         return JSONResponse({"error": "internal service error"}, status_code=500)
-    return
-
 

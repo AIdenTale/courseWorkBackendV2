@@ -3,8 +3,8 @@ import os
 
 import aiohttp
 
+from authService.models.api import TokenGeneratorTokenGenRequest
 from productsService.models.exception import ServiceUnavailableException, TokenVerifyException
-
 
 async def verify_token(token: str):
     user, password = os.getenv("USER_BASIC"), os.getenv("PASSWORD_BASIC")
@@ -22,10 +22,8 @@ async def verify_token(token: str):
     if response.status == 500:
         raise ServiceUnavailableException("cannot make request")
 
+    data = await response.json()
     if response.status == 400:
-        data = await response.json()
         raise TokenVerifyException(data)
 
-
-
-    return True
+    return TokenGeneratorTokenGenRequest(**data)

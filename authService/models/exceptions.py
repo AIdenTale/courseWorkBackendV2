@@ -12,3 +12,10 @@ class EmailAlreadyRegistered(Exception):
 
     def __str__(self):
         return self.email + " уже зарегистрирован"
+
+class TokenVerifyException(Exception):
+    def __init__(self, message):
+        self.message = message
+
+    def __str__(self):
+        return self.message

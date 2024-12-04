@@ -1,6 +1,70 @@
+### Все карточки
+GET http://localhost:8081/cards/all
+
+### Получение карточки по id
+GET http://localhost:8081/cards/by_id?card_id=2
+
+### Добавиление новой карточки
+POST http://localhost:8081/cards/new
+Content-Type: application/json
+
+{
+  "title": "Пояса Nike",
+  "description": "Современные пояса Nike"
+}
+
+### Изменение карточки
+POST http://localhost:8081/cards/update
+Content-Type: application/json
+
+{
+  "id": 6,
+  "title": "Пояса 2"
+}
+
+
+### Удаление карточки
+GET http://localhost:8081/cards/delete?card_id=6
+
+
 ### Все продукты
 GET http://localhost:8081/products/all
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6InVzZXIiLCJpYXQiOjE3MzI3OTUwNTgsImV4cCI6MTczMjg4MTQ1OH0.GSlnCGXWmjUVpTTEdQ6-sntPNjBatUVfSJmrlknJ2zs
+
+### Продукт по id
+GET http://localhost:8081/products/by_id?product_id=13
+
+### Добавление продукта
+POST http://localhost:8081/products/new
+Content-Type: application/json
+
+{
+    "brand": "nike",
+    "price": 3000.0,
+    "size": 41,
+    "color": "синий",
+    "country": "RU",
+    "card_id": 2
+}
+
+### Добавление продукта
+POST http://localhost:8081/products/edit
+Content-Type: application/json
+
+{
+    "id": 17,
+    "brand": "nike",
+    "price": 3000.0,
+    "size": 41,
+    "color": "синий",
+    "country": "RU",
+    "card_id": 2
+}
+
+### Удаление продукта
+GET http://localhost:8081/products/delete?product_id=17
+
+
+
 
 ### Регистрация
 POST http://localhost:8083/register
@@ -14,7 +78,7 @@ Content-Type: application/json
 }
 
 ### Авторизация
-POST http://localhost:8083/auth
+POST http://88.218.66.164/srv/auth-service/auth
 Content-Type: application/json
 
 {
@@ -22,13 +86,17 @@ Content-Type: application/json
   "password": "qwerty123"
 }
 
+### Профиль пользователя
+GET http://localhost:8083/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMzMzQwOTY3LCJleHAiOjE3MzM0MjczNjd9.K9MEpNQbCXUUvgN-Qn2geidJr_6KwSPAx0JsAtuGtS4
+
 ### Получить токен (внутренняя апи)
 POST http://localhost:8085/jwt/generate_new
 Content-Type: application/json
 Authorization: YmFzaWM6YXV0aA==
 
 {
-  "id": 5,
+  "id": 15,
   "role": "user"
 }
 

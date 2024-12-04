@@ -4,24 +4,27 @@ from pydantic import BaseModel, AfterValidator
 
 from authService.utils.validators.str import required, email_required
 
-class ErrorRespModel(BaseModel):
+class Error(BaseModel):
     message: str
 
-class TokenGeneratorServiceRespModel(BaseModel):
+class TokenGeneratorResponse(BaseModel):
     access_token: str
 
-class UserAuthReqModel(BaseModel):
+class TokenGeneratorTokenGenRequest(BaseModel):
+    id: int
+    role: str
+
+class User(BaseModel):
     name: Annotated[str, AfterValidator(required)]
     surname: Annotated[str, AfterValidator(required)]
     email: Annotated[str, AfterValidator(required), AfterValidator(email_required)]
-    password: Annotated[str, AfterValidator(required)]
+    role: Annotated[str, AfterValidator(required)]
+    password: str = None
 
-class UserAuthRespModel(BaseModel):
+class LoginSuccessResponse(BaseModel):
     access_token: str
 
-class UserLoginReqModel(BaseModel):
+class UserLoginRequest(BaseModel):
     email: Annotated[str, AfterValidator(required), AfterValidator(email_required)]
     password: Annotated[str, AfterValidator(required)]
 
-class UserNotFound(BaseModel):
-    message: str
