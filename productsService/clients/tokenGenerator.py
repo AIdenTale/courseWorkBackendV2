@@ -27,3 +27,17 @@ async def verify_token(token: str):
         raise TokenVerifyException(data)
 
     return TokenGeneratorTokenGenRequest(**data)
+
+async def test_headers() -> None:
+    session = aiohttp.ClientSession()
+    response = await session.get("http://auth-service:8080/test")
+
+    await session.close()
+    if response.status == 500:
+        raise ServiceUnavailableException("cannot make request")
+
+    data = await response.json()
+    if response.status == 400:
+        raise TokenVerifyException(data)
+
+    return data

@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request
 from starlette.responses import JSONResponse
 
+from productsService.clients.tokenGenerator import test_headers
 from productsService.models.api import ProductInputModel, ProductsCardInputEditModel, ProductsCardInputModel, \
     ProductInputEditModel
 from productsService.services.middlewares import verify_token_middleware
@@ -104,5 +105,5 @@ async def products_update(request: Request, product_id: int):
     return await delete_product_model(product_id)
 
 @app.get("/test")
-async def test(request: Request):
-    return request.headers
+async def test():
+    return test_headers()

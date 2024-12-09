@@ -37,3 +37,7 @@ async def auth(request: Request):
         return JSONResponse({"error": "internal error", "message": data.message}, status_code=500)
 
     return data
+
+@app.get("/test")
+async def test(request: Request):
+    return request.headers
