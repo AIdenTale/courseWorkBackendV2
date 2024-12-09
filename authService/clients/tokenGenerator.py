@@ -4,7 +4,7 @@ from typing import Tuple
 
 import aiohttp
 
-from authService.models.api import TokenGeneratorServiceRespModel, TokenGeneratorVerifyToken
+from authService.models.api import TokenGeneratorResponse, TokenGeneratorTokenGenRequest
 from authService.models.exceptions import ServiceUnavailableException, TokenVerifyException
 
 _token_generator_urls = {
@@ -55,9 +55,9 @@ async def generate_new_token(id, role):
     if access is None or len(access) == 0:
         raise ValueError("Access token is missing")
 
-    return TokenGeneratorServiceRespModel(access_token=access['access_token'])
+    return TokenGeneratorResponse(access_token=access['access_token'])
 
-async def verify_token(token: str) -> TokenGeneratorVerifyToken:
+async def verify_token(token: str) -> TokenGeneratorTokenGenRequest:
     session = await create_session_with_creds()
     try:
         response = await session.post(await get_token_generator_url("verify"), json={"token": token})
@@ -72,4 +72,4 @@ async def verify_token(token: str) -> TokenGeneratorVerifyToken:
     if response.status == 400:
         raise TokenVerifyException(data)
 
-    return TokenGeneratorVerifyToken(**data)
+    return TokenGeneratorTokenGenRequest(**data)

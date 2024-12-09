@@ -1,12 +1,11 @@
-from authService.clients.db import PostgresClient
+from authService.clients.db import add_new_user, get_user_by_login_and_password, get_user_by_id
 from authService.clients.tokenGenerator import generate_new_token
 
-from authService.models.api import ErrorRespModel, UserLoginReqModel, \
-    UserModel, TokenGeneratorResponseModel, Error, LoginSuccessResponse, UserLoginRequest
+from authService.models.api import Error, \
+    User, Error, LoginSuccessResponse, UserLoginRequest, TokenGeneratorTokenGenRequest
 from authService.models.exceptions import ServiceUnavailableException, EmailAlreadyRegistered
 from authService.utils.utils import get_hash_password
 
-client = PostgresClient()
 
 
 
@@ -15,7 +14,7 @@ async def register_user(user: UserLoginRequest):
         user.password = hash_password
 
         try:
-            id, role = client.add_new_user(user)
+            id, role = add_new_user(user)
         except EmailAlreadyRegistered as e:
             return e
 
@@ -31,11 +30,11 @@ async def register_user(user: UserLoginRequest):
             print(f"UNEXPECTED ERROR: {exception}")
             return Error(message="JWT generation failed, pls contact admins: admin@admin.ru")
 
-async def auth_user(user: UserLoginReqModel):
+async def auth_user(user: UserLoginRequest):
         hash_password = get_hash_password(user.password)
         user.password = hash_password
 
-        payload = client.get_user_by_login_and_password(user)
+        payload = get_user_by_login_and_password(user)
 
         if payload is None:
             return Error(message="user not found")
@@ -54,12 +53,12 @@ async def auth_user(user: UserLoginReqModel):
             print(f"UNEXPECTED ERROR: {exception}")
             return Error(message="JWT generation failed, pls contact admins: admin@admin.ru")
 
-async def get_user_profile(userTokenInfo: TokenGeneratorResponseModel):
-        userInfoRecords = client.get_user_by_id(userTokenInfo.id)
+async def get_user_profile(userTokenInfo: TokenGeneratorTokenGenRequest):
+        userInfoRecords = get_user_by_id(userTokenInfo.id)
         if userInfoRecords is None:
             return Error(message="User not found")
 
-        return UserModel(email=userInfoRecords[0],name=userInfoRecords[1], surname=userInfoRecords[2], role=userInfoRecords[3])
+        return User(email=userInfoRecords[0],name=userInfoRecords[1], surname=userInfoRecords[2], role=userInfoRecords[3])
 
 
 

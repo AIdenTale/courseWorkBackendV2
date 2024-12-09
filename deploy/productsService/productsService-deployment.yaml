@@ -29,6 +29,11 @@ spec:
                 secretKeyRef:
                   name: basic-creds
                   key: password
+            - name: SERVICE_MODE
+              valueFrom:
+                configMapKeyRef:
+                  name: product-service-configs
+                  key: service_mode
           ports:
             - name: web
               containerPort: 8080

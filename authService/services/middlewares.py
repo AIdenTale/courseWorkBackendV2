@@ -4,12 +4,12 @@ from fastapi import Request
 from starlette.responses import JSONResponse
 
 from authService.clients.tokenGenerator import verify_token
-from authService.models.api import TokenGeneratorVerifyToken
+from authService.models.api import TokenGeneratorTokenGenRequest
 from authService.models.exceptions import ServiceUnavailableException, TokenVerifyException
 
 JWT_TOKEN_TYPE = "Bearer"
 
-async def verify_token_middleware(request: Request) -> TokenGeneratorVerifyToken | JSONResponse:
+async def verify_token_middleware(request: Request) -> TokenGeneratorTokenGenRequest | JSONResponse:
     # mode = os.getenv("SERVICE_MODE")
     # if mode is not None:
     #     if mode == "test":
