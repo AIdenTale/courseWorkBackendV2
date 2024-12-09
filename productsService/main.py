@@ -102,3 +102,7 @@ async def products_update(request: Request, product_id: int):
         return result
 
     return await delete_product_model(product_id)
+
+@app.get("/test")
+async def test(request: Request):
+    return request.headers
