@@ -7,6 +7,10 @@ from productsService.utils.validators.float import required_float
 from productsService.utils.validators.int import required_int
 
 
+class TokenGeneratorTokenGenRequest(BaseModel):
+    id: int
+    role: str
+
 class ProductModel(BaseModel):
     id: int = None
     brand: str

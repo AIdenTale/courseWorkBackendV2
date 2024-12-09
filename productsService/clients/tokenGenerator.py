@@ -3,7 +3,7 @@ import os
 
 import aiohttp
 
-from authService.models.api import TokenGeneratorTokenGenRequest
+from productsService.models.api import TokenGeneratorTokenGenRequest
 from productsService.models.exception import ServiceUnavailableException, TokenVerifyException
 
 async def verify_token(token: str):
