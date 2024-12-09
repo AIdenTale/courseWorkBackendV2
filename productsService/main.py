@@ -106,4 +106,4 @@ async def products_update(request: Request, product_id: int):
 
 @app.get("/test")
 async def test():
-    return test_headers()
+    return await test_headers()
