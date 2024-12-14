@@ -4,14 +4,15 @@ from fastapi import Request
 from starlette.responses import JSONResponse
 
 from productsService.clients.tokenGenerator import verify_token
+from productsService.models.api import TokenGeneratorTokenGenRequest
 from productsService.models.exception import ServiceUnavailableException, TokenVerifyException
 
 JWT_TOKEN_TYPE = "Bearer"
 
-async def verify_token_middleware(request: Request):
+async def verify_token_middleware(request: Request) -> TokenGeneratorTokenGenRequest | JSONResponse | None:
     mode = os.getenv("TEST_MODE")
     if mode is not None:
-        return
+        return TokenGeneratorTokenGenRequest(id=1, role="admin")
 
     authorization = request.headers.get('Authorization')
     if authorization is None:
@@ -25,7 +26,7 @@ async def verify_token_middleware(request: Request):
         return JSONResponse({"error": "unauthorized", "message": "invalid token type"}, status_code=401)
 
     try:
-        await verify_token(payload[1])
+        return await verify_token(payload[1])
     except ServiceUnavailableException as e:
         print("TokenGeneratorUnavailable, error: " + str(e))
         return JSONResponse({"error": "internal service error"}, status_code=500)
@@ -39,6 +40,14 @@ async def verify_token_middleware(request: Request):
     except Exception:
         print("UNEXPECTED ERROR: " + str(ValueError))
         return JSONResponse({"error": "internal service error"}, status_code=500)
-    return
 
+async def only_internal_address_middleware(request: Request):
+    header = request.headers.get('host')
+    if header is None:
+        return JSONResponse({"error": "unauthorized", "message": "cannot get token"}, status_code=401)
+
+    if "products-service:8080" == header:
+        return
+
+    return JSONResponse(status_code=401, content={"error": "Access denied"})
 

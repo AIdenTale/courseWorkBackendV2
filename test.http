@@ -1,16 +1,19 @@
 ### Все карточки
 GET http://localhost:8081/cards/all
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzM0MTY4NjU2LCJleHAiOjE3MzQyNTUwNTZ9.fUoaQz3t5Ipko08PSeR5wdIFx6DryQCjptMhuWwyPtY
 
 ### Получение карточки по id
-GET http://localhost:8081/cards/by_id?card_id=2
+GET http://localhost:8081/cards/by_id?card_id=7
 
 ### Добавиление новой карточки
 POST http://localhost:8081/cards/new
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDE2OTAwMiwiZXhwIjoxNzM0MjU1NDAyfQ.BAdxz3YHxBqQ9JPf5yDCMB1Z1cNn4tdLPsxoxoXHPKo
 
 {
-  "title": "Пояса Nike",
-  "description": "Современные пояса Nike"
+  "title": "Ботинки Puma",
+  "description": "Современные ботинки",
+  "brand": "Puma"
 }
 
 ### Изменение карточки
@@ -18,32 +21,34 @@ POST http://localhost:8081/cards/update
 Content-Type: application/json
 
 {
-  "id": 6,
-  "title": "Пояса 2"
+  "id": 8,
+  "title": "Ботинки 41-50"
 }
 
-
 ### Удаление карточки
-GET http://localhost:8081/cards/delete?card_id=6
-
+GET http://localhost:8081/cards/delete?card_id=9
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDE2OTAwMiwiZXhwIjoxNzM0MjU1NDAyfQ.BAdxz3YHxBqQ9JPf5yDCMB1Z1cNn4tdLPsxoxoXHPKo
 
 ### Все продукты
 GET http://localhost:8081/products/all
 
 ### Продукт по id
-GET http://localhost:8081/products/by_id?product_id=13
+GET http://localhost:8081/products/by_id?product_id=18
+
+### Продукт по card_id + sku
+GET http://localhost:8081/products/by_card_id_and_sku?card_id=1&sku=1
 
 ### Добавление продукта
 POST http://localhost:8081/products/new
 Content-Type: application/json
 
 {
-    "brand": "nike",
-    "price": 3000.0,
-    "size": 41,
-    "color": "синий",
+    "price": 8000.0,
+    "size": 44,
+    "color": "черный",
     "country": "RU",
-    "card_id": 2
+    "card_id": 8,
+    "sku": 1
 }
 
 ### Добавление продукта
@@ -51,18 +56,13 @@ POST http://localhost:8081/products/edit
 Content-Type: application/json
 
 {
-    "id": 17,
-    "brand": "nike",
-    "price": 3000.0,
-    "size": 41,
-    "color": "синий",
-    "country": "RU",
-    "card_id": 2
+    "id": 21,
+    "price": 3000.0
 }
 
 ### Удаление продукта
-GET http://localhost:8081/products/delete?product_id=17
-
+GET http://localhost:8081/products/delete?product_id=19
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzM0MTY4NjU2LCJleHAiOjE3MzQyNTUwNTZ9.fUoaQz3t5Ipko08PSeR5wdIFx6DryQCjptMhuWwyPtY
 
 
 
@@ -71,14 +71,14 @@ POST http://localhost:8083/register
 Content-Type: application/json
 
 {
-  "name": "Nikita",
-  "surname": "Almester3",
-  "email": "nikita.almester@ya.ru",
-  "password": "qwerty123"
+  "name": "Serger",
+  "surname": "Shil",
+  "email": "serger.shil@ya.ru",
+  "password": "alm123"
 }
 
 ### Авторизация
-POST http://88.218.66.164/srv/auth-service/auth
+POST http://localhost:8083/auth
 Content-Type: application/json
 
 {
@@ -88,8 +88,8 @@ Content-Type: application/json
 
 ### Профиль пользователя
 GET http://localhost:8083/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMzMzQwOTY3LCJleHAiOjE3MzM0MjczNjd9.K9MEpNQbCXUUvgN-Qn2geidJr_6KwSPAx0JsAtuGtS4
-
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMzMzQwOTY3LCJleHAiOjE3MzM0MjczNjd9.K9MEpNQbCXUUvgN-Qn2geidJr_6KwSPAx0JsAtuGtS4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDE2OTAwMiwiZXhwIjoxNzM0MjU1NDAyfQ.BAdxz3YHxBqQ9JPf5yDCMB1Z1cNn4tdLPsxoxoXHPKo
 ### Получить токен (внутренняя апи)
 POST http://localhost:8085/jwt/generate_new
 Content-Type: application/json
@@ -108,3 +108,5 @@ Content-Type: application/json
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6.eyJpZCI6NSwicm9sZSI6InVzZXIiLCJpYXQiOjE3MzI3NTI1OTIsImV4cCI6MTczMjgzODk5Mn0.KqN_COHv2WB9kqL1CUXoN_4lYLtr2P82E4SCQyJdhk0"
 }
 
+### Test
+GET http://localhost:8083/test

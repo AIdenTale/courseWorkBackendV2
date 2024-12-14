@@ -1,0 +1,20 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: products-kafka-consumer
+  labels:
+    app: products-kafka-consumer
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: products-kafka-consumer
+  template:
+    metadata:
+      labels:
+        app: products-kafka-consumer
+    spec:
+      containers:
+        - name: products-kafka-consumer
+          image: 127.0.0.1:5000/products-kafka-consumerlatest

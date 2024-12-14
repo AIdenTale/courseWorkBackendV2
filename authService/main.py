@@ -7,7 +7,6 @@ from authService.services.middlewares import verify_token_middleware
 from authService.services.services import register_user, auth_user, get_user_profile
 
 app = FastAPI()
-
 @app.post("/register")
 async def reqister(user: User):
     data = await register_user(user)
@@ -28,7 +27,7 @@ async def auth(user: UserLoginRequest):
 
     return data
 @app.get("/profile")
-async def auth(request: Request):
+async def profile(request: Request):
     result = await verify_token_middleware(request)
     if isinstance(result, JSONResponse):
         return result
@@ -37,7 +36,3 @@ async def auth(request: Request):
         return JSONResponse({"error": "internal error", "message": data.message}, status_code=500)
 
     return data
-
-@app.get("/test")
-async def test(request: Request):
-    return request.headers

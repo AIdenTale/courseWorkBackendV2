@@ -7,8 +7,6 @@ from authService.models.exceptions import ServiceUnavailableException, EmailAlre
 from authService.utils.utils import get_hash_password
 
 
-
-
 async def register_user(user: UserLoginRequest):
         hash_password = get_hash_password(user.password)
         user.password = hash_password

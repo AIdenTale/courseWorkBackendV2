@@ -8,3 +8,5 @@ class ProductModel(BaseModel):
     size: int
     color: str
     country: str
+
+

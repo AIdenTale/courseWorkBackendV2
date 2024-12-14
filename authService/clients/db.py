@@ -17,16 +17,16 @@ def make_sql_request(query, args):
 
     return records
 
-def add_new_user(self, user: User) -> Tuple[int, str]:
+def add_new_user(user: User) -> Tuple[int, str]:
         try:
-            records = make_sql_request("INSERT INTO public.users (name, surname, email, password, role) VALUES (%s, %s, %s, %s, %s) RETURNING user.id, user.role",
+            records = make_sql_request("INSERT INTO public.users (name, surname, email, password, role) VALUES (%s, %s, %s, %s, %s) RETURNING id, role",
                         (user.name, user.surname, user.email, user.password, DEFAULT_USER_ROLE))
         except psycopg2.errors.UniqueViolation:
             raise EmailAlreadyRegistered(user.email)
 
         return records[0][0], records[0][1]
 
-def get_user_by_login_and_password(self, user: UserLoginRequest) -> Tuple[int, str] | None:
+def get_user_by_login_and_password(user: UserLoginRequest) -> Tuple[int, str] | None:
         records = make_sql_request("SELECT users.id, users.role FROM public.users WHERE email = %s AND password = %s", (user.email,user.password,))
         if len(records) == 0:
             return None
@@ -34,7 +34,7 @@ def get_user_by_login_and_password(self, user: UserLoginRequest) -> Tuple[int, s
 
 
 
-def get_user_by_id(self, userID) -> tuple[Any, ...] | None:
+def get_user_by_id(userID) -> tuple[Any, ...] | None:
         records =  make_sql_request("SELECT users.email, users.name, users.surname, users.role FROM public.users WHERE id = %s", (userID,))
         if len(records) == 0:
             return None

@@ -18,7 +18,7 @@ class User(BaseModel):
     name: Annotated[str, AfterValidator(required)]
     surname: Annotated[str, AfterValidator(required)]
     email: Annotated[str, AfterValidator(required), AfterValidator(email_required)]
-    role: Annotated[str, AfterValidator(required)]
+    role: str = None
     password: str = None
 
 class LoginSuccessResponse(BaseModel):
