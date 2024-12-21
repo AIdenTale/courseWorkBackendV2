@@ -131,4 +131,3 @@ async def reserve_cards(request: Request, product_id: int):
         return result
 
     return await reserve_product_model(product_id)
-

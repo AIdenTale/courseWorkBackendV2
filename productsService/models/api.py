@@ -31,12 +31,12 @@ class ProductInputModel(BaseModel):
 
 class ProductInputEditModel(BaseModel):
     id: Annotated[int, AfterValidator(required_int)]
-    price: Annotated[float | None,  AfterValidator(lambda v: v if 100 <= v <= 100000 else None)] = None
-    size: Annotated[int | None, AfterValidator(lambda v: v if 10 <= v <= 70 else None)] = None
-    color: Annotated[str | None, AfterValidator(lambda v: v if 50 >= len(v) > 0 else None)] = None
-    country: Annotated[str | None, AfterValidator(lambda v: v if len(v) == 2 else None)] = None
-    card_id: Annotated[int | None, AfterValidator(lambda v: v if INT_LIMIT > v > 0 else None)] = None
-    sku: Annotated[int | None, AfterValidator(lambda v: v if INT_LIMIT > v > 0 else None)] = None
+    price: Annotated[float,  AfterValidator(lambda v: v if 100 <= v <= 100000 else None)] = None
+    size: Annotated[int, AfterValidator(lambda v: v if 10 <= v <= 70 else None)] = None
+    color: Annotated[str, AfterValidator(lambda v: v if 50 >= len(v) > 0 else None)] = None
+    country: Annotated[str, AfterValidator(lambda v: v if len(v) == 2 else None)] = None
+    card_id: Annotated[int, AfterValidator(lambda v: v if INT_LIMIT > v > 0 else None)] = None
+    sku: Annotated[int, AfterValidator(lambda v: v if INT_LIMIT > v > 0 else None)] = None
 
 class ProductOutputModel(BaseModel):
     id: int
@@ -48,9 +48,9 @@ class ProductsCardInputModel(BaseModel):
 
 class ProductsCardInputEditModel(BaseModel):
     id: Annotated[int, AfterValidator(required_int)]
-    title: Annotated[str | None, AfterValidator(lambda v: v if 2 < len(v) <= 500 else None)] = None
-    description: Annotated[str | None, AfterValidator(lambda v: v if 2 < len(v) <= 500 else None)] = None
-    brand: Annotated[str | None, AfterValidator(lambda v: v if 500 >= len(v) > 1 else None)] = None
+    title: Annotated[str, AfterValidator(lambda v: v if 2 < len(v) <= 500 else None)] = None
+    description: Annotated[str, AfterValidator(lambda v: v if 2 < len(v) <= 500 else None)] = None
+    brand: Annotated[str, AfterValidator(lambda v: v if 500 >= len(v) > 1 else None)] = None
 
 class ProductsCardOutputModel(BaseModel):
     id: int
