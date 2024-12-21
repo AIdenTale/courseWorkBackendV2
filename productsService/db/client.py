@@ -152,3 +152,7 @@ def delete_product(product_id: int):
 def reserve_product(product_id: int):
     execute_sql_query("update public.products set is_reserved = true where id = %s", (product_id,), True)
     return
+
+def reserve_delete_product(product_id: int):
+    execute_sql_query("update public.products set is_reserved = false where id = %s", (product_id,), True)
+    return
