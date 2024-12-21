@@ -9,7 +9,7 @@ from productsService.models.exception import ServiceUnavailableException, TokenV
 
 JWT_TOKEN_TYPE = "Bearer"
 
-async def verify_token_middleware(request: Request) -> TokenGeneratorTokenGenRequest | JSONResponse | None:
+async def verify_token_middleware(request: Request) -> TokenGeneratorTokenGenRequest | JSONResponse:
     mode = os.getenv("TEST_MODE")
     if mode is not None:
         return TokenGeneratorTokenGenRequest(id=1, role="admin")
