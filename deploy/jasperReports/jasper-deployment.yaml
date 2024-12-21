@@ -1,0 +1,36 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: jasper-reports
+  labels:
+    app: jasper-reports
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jasper-reports
+  template:
+    metadata:
+      labels:
+        app: jasper-reports
+    spec:
+      containers:
+        - name: jasper-reports
+          image: jasperserver-pro:latest
+          env:
+            - name: DB_HOST
+              value: 88.218.66.164
+            - name: DB_PORT
+              value: 5432
+            - name: DB_USER
+              value: jasperreports
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: jasper-creds
+                  key: password
+            - DB_NAME: reports
+          ports:
+            - name: web
+              containerPort: 8080
