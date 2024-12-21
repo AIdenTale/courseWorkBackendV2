@@ -118,3 +118,9 @@ async def reserve_product_model(product_id: int):
         reserve_product(product_id)
     except Exception as e:
         return JSONResponse(status_code=500, content={"internal server error": str(e)})
+
+async def reserve_delete_product_model(product_id: int):
+    try:
+        reserve_delete_product(product_id)
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"internal server error": str(e)})

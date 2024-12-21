@@ -132,3 +132,11 @@ async def reserve_cards(request: Request, product_id: int):
 
     return await reserve_product_model(product_id)
 
+
+@app.get("/cards/reserve_delete")
+async def reserve_delete(request: Request, product_id: int):
+    result = await only_internal_address_middleware(request)
+    if isinstance(result, JSONResponse):
+        return result
+
+    return await reserve_delete_product_model(product_id)
