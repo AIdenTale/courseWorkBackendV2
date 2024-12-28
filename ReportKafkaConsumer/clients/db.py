@@ -1,7 +1,7 @@
 from typing import Tuple, Any
 import psycopg2
 
-from reportKafkaConsumer.models.db import ReportModel
+from ReportKafkaConsumer.models.db import ReportModel
 
 # Подключение к базе данных REPORTS
 conn = psycopg2.connect(

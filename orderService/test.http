@@ -1,0 +1,26 @@
+### Создание заказа
+POST http://localhost:8089/orders
+Content-Type: application/json
+
+{
+  "user_id": 1,
+  "total_amount": 250.50,
+  "products": [
+    {
+      "price": 100.25,
+      "size": "M",
+      "color": "Red",
+      "country": "China",
+      "sku": 12345,
+      "card_id": 67890
+    },
+    {
+      "price": 150.25,
+      "size": "L",
+      "color": "Blue",
+      "country": "USA",
+      "sku": 54321,
+      "card_id": 98765
+    }
+  ]
+}

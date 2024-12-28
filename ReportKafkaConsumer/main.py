@@ -1,5 +1,5 @@
-from reportKafkaConsumer.clients.kafka import receive_orders_completed
-from reportKafkaConsumer.models.db import ReportModel
+from ReportKafkaConsumer.clients.kafka import receive_orders_completed
+from ReportKafkaConsumer.models.db import ReportModel
 
 
 def main():

@@ -1,8 +1,8 @@
 from datetime import datetime
 from confluent_kafka import Consumer, KafkaError
 
-from reportKafkaConsumer.clients.db import delete_completed_report
-from reportKafkaConsumer.models.db import ReportModel
+from ReportKafkaConsumer.clients.db import delete_completed_report
+from ReportKafkaConsumer.models.db import ReportModel
 
 # Конфигурация Kafka Consumer
 consumer = Consumer({
