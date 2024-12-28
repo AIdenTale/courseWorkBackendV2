@@ -9,7 +9,7 @@ class Order(Base):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, nullable=False)
     order_date = Column(TIMESTAMP)
-    status = Column(String, default='pending')
+    status = Column(String, default='created')
     total_amount = Column(Float, default=0.0)
     products = relationship("OrderProduct", back_populates="order")
 
@@ -19,11 +19,7 @@ class OrderProduct(Base):
 
     id = Column(Integer, primary_key=True)
     order_id = Column(Integer, ForeignKey('orders.id', ondelete='CASCADE'))
-    price = Column(Float)
-    size = Column(String(50))
-    color = Column(String(50))
-    country = Column(String(100))
-    sku = Column(Integer)
+    product_id = Column(Integer)
     card_id = Column(Integer)
 
     order = relationship("Order", back_populates="products")

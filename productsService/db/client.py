@@ -7,9 +7,7 @@ from productsService.models.api import ProductsCardModel, ProductsCardInputModel
 from productsService.models.db import ProductModel
 from productsService.models.exception import ForeignKeyViolation, ZeroLinesUpdated
 
-conn = psycopg2.connect("dbname=products user=service password=hsdg4731jhpasklaksd host=88.218.66.164 port=5432")
-
-
+conn = psycopg2.connect("dbname=products user=root password=mypassword host=213.171.25.1 port=5432")
 def execute_sql_query(query: str, args: Tuple[Any, ...] | None = None, must_commit: bool | None = None) -> Any:
     cur = conn.cursor()
     cur.execute(query, args)

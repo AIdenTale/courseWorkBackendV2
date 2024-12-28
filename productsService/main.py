@@ -73,7 +73,7 @@ async def products_by_id(request: Request, product_id: int):
     if isinstance(result, JSONResponse):
         return result
 
-    return await get_products_by_id(product_id)
+    return get_products_by_id(product_id)
 
 @app.get("/products/by_card_id_and_sku")
 async def products_by_card_and_and_sku(request: Request, card_id: int, sku: int):
@@ -125,10 +125,6 @@ async def products_delete(request: Request, product_id: int):
     return await delete_product_model(product_id)
 
 @app.get("/cards/reserve")
-async def reserve_cards(request: Request, product_id: int):
-    result = await only_internal_address_middleware(request)
-    if isinstance(result, JSONResponse):
-        return result
-
+async def reserve_cards(product_id: int):
     return await reserve_product_model(product_id)
 

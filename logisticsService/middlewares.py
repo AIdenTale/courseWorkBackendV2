@@ -3,9 +3,8 @@ import os
 from fastapi import Request
 from starlette.responses import JSONResponse
 
-from productsService.clients.tokenGenerator import verify_token
-from productsService.models.api import TokenGeneratorTokenGenRequest
-from productsService.models.exception import ServiceUnavailableException, TokenVerifyException
+from orderService.clients.tokenGenerator import verify_token
+from orderService.model.tokenGenerator import ServiceUnavailableException, TokenVerifyException, TokenGeneratorTokenGenRequest
 
 JWT_TOKEN_TYPE = "Bearer"
 BASIC_TOKEN_TYPE = "Basic"
@@ -24,9 +23,9 @@ async def verify_token_middleware(request: Request) -> TokenGeneratorTokenGenReq
         return JSONResponse({"error": "unauthorized", "message": "cannot get token"}, status_code=401)
 
     if payload[0] != JWT_TOKEN_TYPE:
-        return JSONResponse({"error": "unauthorized", "message": "invalid token type"}, status_code=401)
-    if payload[0] != BASIC_TOKEN_TYPE:
-        return JSONResponse({"error": "unauthorized", "message": "invalid token type"}, status_code=401)
+        if payload[0] != BASIC_TOKEN_TYPE:
+            return JSONResponse({"error": "unauthorized", "message": "invalid token type"}, status_code=401)
+
 
     try:
         return await verify_token(payload[1])
@@ -43,14 +42,4 @@ async def verify_token_middleware(request: Request) -> TokenGeneratorTokenGenReq
     except Exception:
         print("UNEXPECTED ERROR: " + str(ValueError))
         return JSONResponse({"error": "internal service error"}, status_code=500)
-
-async def only_internal_address_middleware(request: Request):
-    header = request.headers.get('host')
-    if header is None:
-        return JSONResponse({"error": "unauthorized", "message": "cannot get token"}, status_code=401)
-
-    if "products-service:8080" == header:
-        return
-
-    return JSONResponse(status_code=401, content={"error": "Access denied"})
 

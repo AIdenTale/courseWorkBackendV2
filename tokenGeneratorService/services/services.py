@@ -30,3 +30,4 @@ async def verify_token(token: str):
     except Exception as e:
         print(f"unexpected error: {e}")
         return ErrorRespModel(message="internal server error")
+

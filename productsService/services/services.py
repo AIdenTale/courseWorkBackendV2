@@ -53,10 +53,10 @@ async def delete_product_card(card_id: int):
 async def get_all_products():
     return all_products()
 
-async def get_products_by_id(id: int):
+def get_products_by_id(id: int):
     result = product_by_id(id)
     if result is None:
-        return JSONResponse(status_code=204, content=None)
+        return JSONResponse(status_code=422, content={"status": "ok"})
 
     return result
 

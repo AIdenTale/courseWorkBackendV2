@@ -3,8 +3,9 @@ import os
 
 import aiohttp
 
-from productsService.models.api import TokenGeneratorTokenGenRequest
-from productsService.models.exception import ServiceUnavailableException, TokenVerifyException
+from orderService.model.tokenGenerator import TokenGeneratorTokenGenRequest, ServiceUnavailableException, \
+    TokenVerifyException
+
 
 async def verify_token(token: str) -> TokenGeneratorTokenGenRequest:
     user, password = os.getenv("USER_BASIC"), os.getenv("PASSWORD_BASIC")

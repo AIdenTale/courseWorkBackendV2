@@ -3,9 +3,8 @@ import os
 from fastapi import Request
 from starlette.responses import JSONResponse
 
-from productsService.clients.tokenGenerator import verify_token
-from productsService.models.api import TokenGeneratorTokenGenRequest
-from productsService.models.exception import ServiceUnavailableException, TokenVerifyException
+from orderService.clients.tokenGenerator import verify_token
+from orderService.model.tokenGenerator import ServiceUnavailableException, TokenVerifyException, TokenGeneratorTokenGenRequest
 
 JWT_TOKEN_TYPE = "Bearer"
 BASIC_TOKEN_TYPE = "Basic"
@@ -25,7 +24,7 @@ async def verify_token_middleware(request: Request) -> TokenGeneratorTokenGenReq
 
     if payload[0] != JWT_TOKEN_TYPE:
         return JSONResponse({"error": "unauthorized", "message": "invalid token type"}, status_code=401)
-    if payload[0] != BASIC_TOKEN_TYPE:
+    elif payload[0] != BASIC_TOKEN_TYPE:
         return JSONResponse({"error": "unauthorized", "message": "invalid token type"}, status_code=401)
 
     try:

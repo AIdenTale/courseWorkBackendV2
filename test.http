@@ -3,7 +3,8 @@ GET http://localhost:8081/cards/all
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzM0MTY4NjU2LCJleHAiOjE3MzQyNTUwNTZ9.fUoaQz3t5Ipko08PSeR5wdIFx6DryQCjptMhuWwyPtY
 
 ### Получение карточки по id
-GET http://localhost:8081/cards/by_id?card_id=7
+GET http://localhost:8081/cards/by_id?card_id=2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzM0MTY4NjU2LCJleHAiOjE3MzQyNTUwNTZ9.fUoaQz3t5Ipko08PSeR5wdIFx6DryQCjptMhuWwyPtY
 
 ### Добавиление новой карточки
 POST http://localhost:8081/cards/new
@@ -11,9 +12,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDE2OTAwMiwiZXhwIjoxNzM0MjU1NDAyfQ.BAdxz3YHxBqQ9JPf5yDCMB1Z1cNn4tdLPsxoxoXHPKo
 
 {
-  "title": "Ботинки Puma",
-  "description": "Современные ботинки",
-  "brand": "Puma"
+  "title": "Ботинки Puma"
 }
 
 ### Изменение карточки
@@ -26,7 +25,7 @@ Content-Type: application/json
 }
 
 ### Удаление карточки
-GET http://localhost:8081/cards/delete?card_id=9
+GET http://localhost:8081/cards/delete?card_id=2
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDE2OTAwMiwiZXhwIjoxNzM0MjU1NDAyfQ.BAdxz3YHxBqQ9JPf5yDCMB1Z1cNn4tdLPsxoxoXHPKo
 
 ### Все продукты
@@ -50,6 +49,7 @@ Content-Type: application/json
     "card_id": 8,
     "sku": 1
 }
+
 
 ### Добавление продукта
 POST http://localhost:8081/products/edit
@@ -77,8 +77,12 @@ Content-Type: application/json
   "password": "alm123"
 }
 
+### Тест
+GET http://88.218.66.164/srv/products-service/cards/all
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDE3MTE0MywiZXhwIjoxNzM0MjU3NTQzfQ.uRJW7lqWT-3AGNj4u59MBlc7-E6Gre8D2slDIrYYRAM
+
 ### Авторизация
-POST http://localhost:8083/auth
+POST http://88.218.66.164/srv/auth-service/auth
 Content-Type: application/json
 
 {
@@ -87,9 +91,9 @@ Content-Type: application/json
 }
 
 ### Профиль пользователя
-GET http://localhost:8083/profile
+POST http://localhost:8085/jwt/verify
 #Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMzMzQwOTY3LCJleHAiOjE3MzM0MjczNjd9.K9MEpNQbCXUUvgN-Qn2geidJr_6KwSPAx0JsAtuGtS4
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDE2OTAwMiwiZXhwIjoxNzM0MjU1NDAyfQ.BAdxz3YHxBqQ9JPf5yDCMB1Z1cNn4tdLPsxoxoXHPKo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzM1MzU0NDc1LCJleHAiOjE3MzU0NDA4NzV9.TNoV7QvKiuSlaKQbOtEUlF3xfCDptlTZZnzBK7mv7tA
 ### Получить токен (внутренняя апи)
 POST http://localhost:8085/jwt/generate_new
 Content-Type: application/json
@@ -101,11 +105,11 @@ Authorization: YmFzaWM6YXV0aA==
 }
 
 ### Провалидировать токен (внутренняя апи)
-POST http://localhost:8081/jwt/verify
+POST http://localhost:8085/jwt/verify
 Content-Type: application/json
 
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6.eyJpZCI6NSwicm9sZSI6InVzZXIiLCJpYXQiOjE3MzI3NTI1OTIsImV4cCI6MTczMjgzODk5Mn0.KqN_COHv2WB9kqL1CUXoN_4lYLtr2P82E4SCQyJdhk0"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzM1MzU0NDc1LCJleHAiOjE3MzU0NDA4NzV9.TNoV7QvKiuSlaKQbOtEUlF3xfCDptlTZZnzBK7mv7tA"
 }
 
 ### Test
