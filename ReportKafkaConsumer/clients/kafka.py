@@ -4,7 +4,6 @@ from confluent_kafka import Consumer, KafkaError
 from ReportKafkaConsumer.clients.db import delete_completed_report
 from ReportKafkaConsumer.models.db import ReportModel
 
-# Конфигурация Kafka Consumer
 consumer = Consumer({
     'bootstrap.servers': '88.218.66.164:9092',
     'auto.offset.reset': 'earliest',
@@ -12,7 +11,6 @@ consumer = Consumer({
     'enable.auto.commit': False
 })
 
-# Подписка на топик
 consumer.subscribe(["orders-completed"])
 
 def receive_orders_completed():

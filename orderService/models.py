@@ -2,7 +2,6 @@ from sqlalchemy import Column, Integer, String, Float, TIMESTAMP, ForeignKey
 from sqlalchemy.orm import relationship
 from orderService.database import Base
 
-# Модель заказа
 class Order(Base):
     __tablename__ = 'orders'
 
@@ -13,7 +12,6 @@ class Order(Base):
     total_amount = Column(Float, default=0.0)
     products = relationship("OrderProduct", back_populates="order")
 
-# Модель товаров в заказе
 class OrderProduct(Base):
     __tablename__ = 'order_products'
 

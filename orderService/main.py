@@ -65,7 +65,6 @@ async def create_order(request: Request, order: OrderCreateSchema, db: Session =
     return new_order
 
 
-# 📌 2. Удаление заказа
 @app.delete("/{order_id}")
 async def delete_order(request: Request, order_id: int, db: Session = Depends(get_db)):
     result = await verify_token_middleware(request)

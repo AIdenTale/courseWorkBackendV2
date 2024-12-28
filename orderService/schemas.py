@@ -3,17 +3,14 @@ import datetime
 from pydantic import BaseModel
 from typing import List, Optional
 
-# Товар в заказе
 class OrderProductSchema(BaseModel):
     product_id: int
     card_id: int
 
-# Создание заказа
 class OrderCreateSchema(BaseModel):
     user_id: int
     products: List[OrderProductSchema]
 
-# Ответ по заказу
 class OrderResponseSchema(BaseModel):
     id: int
     user_id: int

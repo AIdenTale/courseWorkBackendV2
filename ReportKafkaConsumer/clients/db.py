@@ -3,7 +3,6 @@ import psycopg2
 
 from ReportKafkaConsumer.models.db import ReportModel
 
-# Подключение к базе данных REPORTS
 conn = psycopg2.connect(
     "dbname=reports user=service password=hsdg4731jhpasklaksd host=88.218.66.164 port=5432"
 )
