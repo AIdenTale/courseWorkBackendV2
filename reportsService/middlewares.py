@@ -43,13 +43,3 @@ async def verify_token_middleware(request: Request) -> TokenGeneratorTokenGenReq
         print("UNEXPECTED ERROR: " + str(ValueError))
         return JSONResponse({"error": "internal service error"}, status_code=500)
 
-async def only_internal_address_middleware(request: Request):
-    header = request.headers.get('host')
-    if header is None:
-        return JSONResponse({"error": "unauthorized", "message": "cannot get token"}, status_code=401)
-
-    if "products-service:8080" == header:
-        return
-
-    return JSONResponse(status_code=401, content={"error": "Access denied"})
-

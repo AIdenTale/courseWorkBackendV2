@@ -10,12 +10,6 @@ from authService.models.exceptions import ServiceUnavailableException, TokenVeri
 JWT_TOKEN_TYPE = "Bearer"
 
 async def verify_token_middleware(request: Request) -> TokenGeneratorTokenGenRequest | JSONResponse:
-    # mode = os.getenv("SERVICE_MODE")
-    # if mode is not None:
-    #     if mode == "test":
-    #         return TokenGeneratorVerifyToken(id=1, role="admin")
-    #     else:
-    #         pass
 
     authorization = request.headers.get('Authorization')
     if authorization is None:

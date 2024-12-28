@@ -49,7 +49,7 @@ async def cards_update(request: Request, card: ProductsCardInputEditModel):
 
     return await edit_product_card(card)
 @app.get("/cards/delete")
-async def cards_update(request: Request, card_id: int):
+async def cards_delete(request: Request, card_id: int):
     result = await verify_token_middleware(request)
     if isinstance(result, JSONResponse):
         return result
