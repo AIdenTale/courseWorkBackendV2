@@ -5,7 +5,7 @@ from ReportKafkaConsumer.clients.db import delete_completed_report
 from ReportKafkaConsumer.models.db import ReportModel
 
 consumer = Consumer({
-    'bootstrap.servers': '88.218.66.164:9092',
+    'bootstrap.servers': '213.171.25.1:9092',
     'auto.offset.reset': 'earliest',
     'group.id': 'reports-1',
     'enable.auto.commit': False
